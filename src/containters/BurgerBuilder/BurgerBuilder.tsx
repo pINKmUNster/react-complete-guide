@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Burger from "../../components/Burger/Burger";
 import { Ingredients } from "../../components/Burger/BurgerIngredient/BurgerIngredient";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Modal from "../../components/UI/Modal/Modal";
 
 const INGREDIENT_PRICES: { [propertyName: string]: number } = {
@@ -13,20 +14,17 @@ const INGREDIENT_PRICES: { [propertyName: string]: number } = {
 
 class BurgerBuilder extends Component {
 
-    state: {
-        ingredients: { [propertyName: string]: number },
-        totalPrice: number,
-        purchasable: boolean
-    } = {
-            ingredients: {
-                Salad: 0,
-                Bacon: 0,
-                Meat: 0,
-                Cheese: 0
-            },
-            totalPrice: 4,
-            purchasable: false
-        };
+    state: BurgerBuilderState = {
+        ingredients: {
+            Salad: 0,
+            Bacon: 0,
+            Meat: 0,
+            Cheese: 0
+        },
+        totalPrice: 4,
+        purchasable: false,
+        purchasing: false,
+    };
     render() {
 
         const disabledInfo: { [propertyName: string]: boolean } = {
@@ -41,7 +39,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Fragment>
-                <Modal />
+                <Modal show={this.state.purchasing} > <OrderSummary ingredients={this.state.ingredients} /></Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
@@ -49,6 +47,7 @@ class BurgerBuilder extends Component {
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
                     purchasable={this.state.purchasable}
+                    orderClicked={this.purchasingHandler}
                 />
             </Fragment>);
     }
@@ -59,6 +58,10 @@ class BurgerBuilder extends Component {
         }).reduce((sum, el) => { return sum + el; }, 0);
 
         this.setState({ purchasable: sum > 0 })
+    }
+
+    purchasingHandler = () => {
+        this.setState({ purchasing: true });
     }
 
     addIngredientHandler = (type: Ingredients) => {
@@ -104,3 +107,11 @@ class BurgerBuilder extends Component {
 }
 
 export default BurgerBuilder;
+
+
+interface BurgerBuilderState {
+    ingredients: { [propertyName: string]: number },
+    totalPrice: number,
+    purchasable: boolean,
+    purchasing: boolean
+}

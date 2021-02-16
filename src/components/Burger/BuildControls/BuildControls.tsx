@@ -17,6 +17,7 @@ export interface Props {
     disabled: { [propertyName: string]: boolean };
     ingredientAdded: (type: Ingredients) => void;
     removedIngredient: (type: Ingredients) => void;
+    orderClicked: () => void;
 }
 
 const BuildControls: React.FC<Props> = (props) => {
@@ -31,7 +32,7 @@ const BuildControls: React.FC<Props> = (props) => {
                 />
             })}
 
-            <button disabled={!props.purchasable} className={classes.OrderButton}>ORDER NOW</button>
+            <button onClick={props.orderClicked} disabled={!props.purchasable} className={classes.OrderButton}>ORDER NOW</button>
         </div>
     )
 }
