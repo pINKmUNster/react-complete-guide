@@ -10,7 +10,16 @@ const controls = [
     { label: 'Meat', type: Ingredients.Meat }
 ];
 
-const BuildControls = (props: any) => {
+
+export interface Props {
+    price: number;
+    purchasable: boolean;
+    disabled: { [propertyName: string]: boolean };
+    ingredientAdded: (type: Ingredients) => void;
+    removedIngredient: (type: Ingredients) => void;
+}
+
+const BuildControls: React.FC<Props> = (props) => {
     return (
         <div className={classes.BuildControls}>
             <p> Price : <strong>{props.price.toFixed(2)}</strong></p>
@@ -21,6 +30,8 @@ const BuildControls = (props: any) => {
                     disabled={props.disabled[control.type]}
                 />
             })}
+
+            <button disabled={!props.purchasable} className={classes.OrderButton}>ORDER NOW</button>
         </div>
     )
 }
