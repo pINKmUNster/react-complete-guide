@@ -1,8 +1,23 @@
 .NavigationItems{
     margin:0;
     padding: 0;
+    flex-flow: column;
     list-style: none;
-    display: flex;
+    display: block;
     align-items: center;
-    height: 100%;
+    width: 100%;
+}
+
+
+@media(min-width:500px)
+{
+    .NavigationItems{
+        margin:0;
+        padding: 0;
+        flex-flow: row;
+        list-style: none;
+        display: block;
+        align-items: center;
+        width: 100%;
+    }
 }
