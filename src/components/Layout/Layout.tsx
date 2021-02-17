@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
-import classes from  './Layout.module.css'
+import Toolbar from '../Navigation/Toolbar/Toolbar';
+import classes from './Layout.module.css'
 
-const layout =(props: { children: React.ReactNode; }) =>(
+const layout = (props: { children: React.ReactNode; }) => (
     <Fragment>
-        <div>Toolbar, SideDrawer, BackDrop</div>
+        <Toolbar />
         <main className={classes.Content}>
             {props.children}
         </main>
     </Fragment>
 );
-
 
 export default layout;
