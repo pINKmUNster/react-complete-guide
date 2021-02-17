@@ -14,6 +14,7 @@ const OrderSummary: FunctionComponent<MyProp> = (props) => {
             <ul>
                 {ingredientSummary}
             </ul>
+            <p>Price : {props.price.toFixed(2)}</p>
             <p>Continue to checkout ?</p>
             <Button btnType={ButtonType.Danger} clicked={props.canceled}>CANCEL</Button>
             <Button btnType={ButtonType.Success} clicked={props.continued}>CONTINUE</Button>
@@ -27,4 +28,5 @@ interface MyProp {
     ingredients: { [propertyName: string]: number },
     canceled: () => void;
     continued: () => void;
+    price: number;
 }
