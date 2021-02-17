@@ -6,9 +6,6 @@ function Burger(props: { ingredients: { [propertyName: string]: number }, }) {
     let transformedIngredients = Object.keys(props.ingredients)
         .map(igKey => {
             return [...Array(props.ingredients[igKey])].map((_, i) => {
-                if (i === 0) {
-                    return;
-                }
                 let type: Ingredients = Ingredients[igKey as keyof typeof Ingredients];
                 return <BurgerIngredient key={igKey + i} type={type} />
             })
