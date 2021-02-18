@@ -1,6 +1,6 @@
 import classes from './BurgerIngredient.module.css';
 
-export enum Ingredients {
+export enum IngredientType {
     BreadBottom = "BreadBottom",
     BreadTop = "BreadTop",
     Meat = "Meat",
@@ -9,29 +9,33 @@ export enum Ingredients {
     Bacon = "Bacon"
 }
 
-const burgerIngredient = (props: { type: Ingredients; }) => {
+export interface Ingredients {
+    ingredients: { [propertyName: string]: number },
+}
+
+const burgerIngredient = (props: { type: IngredientType; }) => {
     let ingredient = null;
 
     switch (props.type) {
-        case (Ingredients.BreadBottom):
+        case (IngredientType.BreadBottom):
             ingredient = <div className={classes.BreadBottom}></div>;
             break;
-        case (Ingredients.BreadTop):
+        case (IngredientType.BreadTop):
             ingredient = (<div className={classes.BreadTop}>
                 <div className={classes.Seeds1}></div>
                 <div className={classes.Seeds2}></div>
             </div>);
             break;
-        case (Ingredients.Meat):
+        case (IngredientType.Meat):
             ingredient = <div className={classes.Meat}></div>;
             break;
-        case (Ingredients.Cheese):
+        case (IngredientType.Cheese):
             ingredient = <div className={classes.Cheese}></div>;
             break;
-        case (Ingredients.Salad):
+        case (IngredientType.Salad):
             ingredient = <div className={classes.Salad}></div>;
             break;
-        case (Ingredients.Bacon):
+        case (IngredientType.Bacon):
             ingredient = <div className={classes.Bacon}></div>;
             break;
         default:

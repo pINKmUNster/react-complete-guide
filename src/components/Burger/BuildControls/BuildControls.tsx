@@ -1,13 +1,13 @@
-import { Ingredients } from '../BurgerIngredient/BurgerIngredient';
+import { IngredientType } from '../BurgerIngredient/BurgerIngredient';
 import BuildControl from './BuildControl/BuildControl';
 import classes from './BuildControls.module.css'
 
 
 const controls = [
-    { label: 'Salad', type: Ingredients.Salad },
-    { label: 'Bacon', type: Ingredients.Bacon },
-    { label: 'Cheese', type: Ingredients.Cheese },
-    { label: 'Meat', type: Ingredients.Meat }
+    { label: 'Salad', type: IngredientType.Salad },
+    { label: 'Bacon', type: IngredientType.Bacon },
+    { label: 'Cheese', type: IngredientType.Cheese },
+    { label: 'Meat', type: IngredientType.Meat }
 ];
 
 
@@ -15,8 +15,8 @@ export interface Props {
     price: number;
     purchasable: boolean;
     disabled: { [propertyName: string]: boolean };
-    ingredientAdded: (type: Ingredients) => void;
-    removedIngredient: (type: Ingredients) => void;
+    ingredientAdded: (type: IngredientType) => void;
+    removedIngredient: (type: IngredientType) => void;
     orderClicked: () => void;
 }
 

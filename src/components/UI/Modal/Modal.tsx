@@ -22,6 +22,6 @@ const Modal: React.FunctionComponent<MyProps> = (props) => {
 export default Modal
 
 interface MyProps {
-    show: boolean;
+    show?: boolean;
     modalClosed: () => void;
 }
