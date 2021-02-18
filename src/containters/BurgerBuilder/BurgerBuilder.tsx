@@ -7,6 +7,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import axios from '../../axios-orders'
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../withErrorHandler";
+import { RouteComponentProps } from "react-router-dom";
 
 
 const INGREDIENT_PRICES: { [propertyName: string]: number } = {
@@ -16,8 +17,7 @@ const INGREDIENT_PRICES: { [propertyName: string]: number } = {
     Bacon: 0.7,
 };
 
-class BurgerBuilder extends Component {
-
+class BurgerBuilder extends Component<RouteComponentProps> {
     state: BurgerBuilderState = {
         ingredients: {
             Salad: 0,
@@ -73,28 +73,29 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({ loading: true });
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: "Flo",
-                address: {
-                    street: "test",
-                    zipCode: '1321'
-                },
-                email: "a@a.fr"
-            },
-            deliveryMethod: 'fastest'
-        };
-        axios.post('/orders.json', order)
-            .then(r => {
-                this.setState({ loading: false, purchasing: false });
-            })
-            .catch(e => {
-                this.setState({ loading: false, purchasing: false });
-                console.log(e);
-            })
+        this.props.history.push("/checkout");
+        // this.setState({ loading: true });
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: "Flo",
+        //         address: {
+        //             street: "test",
+        //             zipCode: '1321'
+        //         },
+        //         email: "a@a.fr"
+        //     },
+        //     deliveryMethod: 'fastest'
+        // };
+        // axios.post('/orders.json', order)
+        //     .then(r => {
+        //         this.setState({ loading: false, purchasing: false });
+        //     })
+        //     .catch(e => {
+        //         this.setState({ loading: false, purchasing: false });
+        //         console.log(e);
+        //     })
     }
 
     modalCloseHandler = () => {
